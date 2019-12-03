@@ -57,7 +57,24 @@ public class Floristeria {
 
 
 	
-	
+	public void showAllStock() {
+		System.out.println("Productos en Stock:");
+		
+		System.out.println("Arboles: ");
+		for (Tree tree : this.treeStock) {
+			System.out.println(tree.toString());
+		}		
+		System.out.println("Flores: ");
+		for (Flower flower : this.flowerStock) {
+			System.out.println(flower.toString());
+		}
+		
+		System.out.println("Decoracion: ");
+		for (Deco deco : this.decoStock) {
+			System.out.println(deco.toString());
+		}
+		
+	}
 	
 	
 	

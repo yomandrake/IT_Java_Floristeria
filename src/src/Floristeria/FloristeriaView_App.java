@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class FloristeriaView_App {
 	
-		public void main(Scanner sc) {
+	List<Floristeria> myFloristerias = new ArrayList<>();
+	
+		public void main(Scanner sc) {		
 			
 			
-			List<Floristeria> myFloristerias = new ArrayList<>();
 			boolean executeMain = true;
 			char userChoice;
 			
@@ -40,7 +42,7 @@ public class FloristeriaView_App {
 						
 						System.out.print("Introduce el numero de floristeria que desea editar= ");
 						int floristeriaElegida = sc.nextInt();
-						editFloristeria(floristeriaElegida,sc);					
+						this.editFloristeria(floristeriaElegida, sc);					
 						
 						break;
 
@@ -69,39 +71,69 @@ public class FloristeriaView_App {
 			
 		}
 
-		private static void editFloristeria(int floristeriaElegida,Scanner sc) {
+		private void editFloristeria(int floristeriaElegida,Scanner sc) {
 			boolean editing = true;
 			
 			do {
-				System.out.println("1-Agregar Arbol"
-						+ "\n2-Agregar Flor"
-						+ "\n3-Agregar Deco"
-						+ "\n4-Salir de la floristeria");
+				System.out.println("\t1-Agregar Arbol"
+						+ "\n\t2-Agregar Flor"
+						+ "\n\t3-Agregar Deco"
+						+ "\n\t4-Conocer el Stock"
+						+ "\n\t5-Salir de la floristeria");
 				System.out.print("\tElige la opcion deseada = ");
 				int userChoice = sc.nextInt();
 				
 				switch(userChoice) {
 				case 1://Add tree
 					Tree newTree = new Tree();
-					System.out.println("\tAltura(Recordar .00)= ");
+					System.out.print("\tAltura(Recordar ,00)= ");
 					newTree.setAltura((float) sc.nextFloat());
-					System.out.println("\tPrecio(Recordar .00)= ");
+					System.out.print("\tPrecio(Recordar ,00)= ");
 					newTree.setPrecio((float) sc.nextFloat());
+					this.myFloristerias.get(floristeriaElegida).getTreeStock().add(newTree);
 					
-					
+					System.out.println("Has agregado en "+this.myFloristerias.get(floristeriaElegida).getShopName()
+							+ "el siguiente arbol: "+ newTree.toString());
 					
 					break;
 
 				case 2://Add Flower
+					Flower newFlower = new Flower();
+					
+					System.out.print("\tColor= ");
+					newFlower.setColor(sc.next());
+					
+					System.out.print("\tPrecio(Recordar ,00)= ");
+					newFlower.setPrecio((float) sc.nextFloat());
+					this.myFloristerias.get(floristeriaElegida).getFlowerStock().add(newFlower);
+					
+					System.out.println("Has agregado en "+this.myFloristerias.get(floristeriaElegida).getShopName()
+							+ "la siguiente flor: "+ newFlower.toString());
 					
 					break;
 
 				case 3://Add Deco
+
+					Deco newDeco = new Deco();
+					
+					System.out.print("\tMaterial (0-Madera o 1=Plastico)= ");
+					newDeco.setMaterial(sc.nextInt());
+					System.out.print("\tPrecio(Recordar ,00)= ");
+					newDeco.setPrecio((float) sc.nextFloat());
+					this.myFloristerias.get(floristeriaElegida).getDecoStock().add(newDeco);
+					
+					System.out.println("Has agregado en "+this.myFloristerias.get(floristeriaElegida).getShopName()
+							+ "la siguiente decoracion: "+ newDeco.toString());
 					
 					break;
 				
-				case 4://Exit
+				case 4://Conocer el Stock
+					this.myFloristerias.get(floristeriaElegida).showAllStock();
+					break;
+					
+				case 5://Exit
 					editing = false;
+					System.out.println("Has terminado de editar la floristeria");
 					break;
 					
 				default:
